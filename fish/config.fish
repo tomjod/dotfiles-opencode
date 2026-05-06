@@ -16,6 +16,9 @@ set fish_greeting
 set -x OPENCODE_ENABLE_EXA 1
 set -x OPENCODE_EXPERIMENTAL_LSP_TOOL true
 
+# --- Git via GITHUB_TOKEN (see bootstrap.sh for setup) ---
+# Token is set in ~/.config/fish/conf.d/github-token.fish (local, not in repo)
+
 # --- Editor ---
 set -x EDITOR "code --wait"
 

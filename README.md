@@ -32,6 +32,7 @@ exec fish
 - Fish shell (`apt install fish` / `brew install fish`)
 - Bun (`curl -fsSL https://bun.sh/install | bash`)
 - Engram opcional (`curl -fsSL https://engram.ai/install | bash`) — para memoria persistente
+- Git + `~/.local/bin` en PATH (incluido en fish config)
 
 ## Secrets (setup manual)
 
@@ -40,6 +41,18 @@ Después del bootstrap, edita `~/.config/opencode/opencode.json`:
 1. `YOUR_STITCH_API_KEY` → Google AI Studio API key
 2. `YOUR_SUPABASE_PROJECT_REF` → tu project ref de Supabase
 3. Model API keys → ejecuta `opencode` y usa `/connect`
+
+## GITHUB_TOKEN (git push sin fricción)
+
+El bootstrap te pide el token. Para configurarlo manual después:
+
+```fish
+# Crea el archivo de secrets (NO se commitea al repo)
+echo 'set -x GITHUB_TOKEN ghp_tu_token_aqui' > ~/.config/fish/conf.d/github-token.fish
+exec fish
+```
+
+Esto combina con el credential helper (`~/.local/bin/git-credential-github-token`) para que `git push` funcione en fish igual que en bash.
 
 ## Actualizar desde el repo
 
