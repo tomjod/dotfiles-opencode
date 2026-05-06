@@ -5,7 +5,7 @@ Mi configuración completa de OpenCode "modo pro" — orquestador multi-modelo, 
 ## Quick Start (máquina nueva)
 
 ```bash
-git clone https://github.com/TU_USER/dotfiles-opencode.git ~/dotfiles
+git clone https://github.com/tomjod/dotfiles-opencode.git ~/dotfiles
 cd ~/dotfiles
 ./bootstrap.sh
 exec fish
