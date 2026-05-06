@@ -1,0 +1,14 @@
+[Unit]
+Description=OpenVPN3 — White PC VPN (home access)
+Documentation=https://openvpn.net/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openvpn3 session-start --config white-pc --background --persist-tun
+ExecStop=/usr/bin/openvpn3 session-manage --config white-pc --disconnect
+Restart=no
+
+[Install]
+WantedBy=default.target

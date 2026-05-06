@@ -1,14 +1,11 @@
+# ⚠️ DEPRECATED — use openvpn3-session@white-pc (built-in)
+# This file kept for reference only.
+# Setup: openvpn3 config-import --config FILE.ovpn --name white-pc --persistent
+#        openvpn3 config-acl --config white-pc --grant root --transfer-owner-session true
+#        sudo systemctl enable --now openvpn3-session@white-pc
 [Unit]
-Description=OpenVPN3 — White PC VPN (home access)
-Documentation=https://openvpn.net/
-Wants=network-online.target
-After=network-online.target
-
+Description=OpenVPN3 White PC — DEPRECATED (use openvpn3-session@white-pc)
 [Service]
-Type=simple
-ExecStart=/usr/bin/openvpn3 session-start --config white-pc --background --persist-tun
-ExecStop=/usr/bin/openvpn3 session-manage --config white-pc --disconnect
-Restart=no
-
+ExecStart=/bin/true
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
