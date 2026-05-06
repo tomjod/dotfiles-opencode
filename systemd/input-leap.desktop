@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Input Leap
+Comment=Keyboard/Mouse Sharing
+Exec=/home/mv/.local/input-leap/bin/input-leap
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
