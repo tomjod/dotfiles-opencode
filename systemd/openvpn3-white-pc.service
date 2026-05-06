@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenVPN3 — Lenovo LOQ VPN (home access)
+Description=OpenVPN3 — White PC VPN (home access)
 Documentation=https://openvpn.net/
 Wants=network-online.target
 After=network-online.target
@@ -8,10 +8,10 @@ Before=display-manager.service
 [Service]
 Type=simple
 ExecStart=/usr/bin/openvpn3 session-start \
-    --config /etc/openvpn3/client/lenovo-loq.ovpn \
+    --config /etc/openvpn3/client/white-pc.ovpn \
     --background \
     --persist-tun
-ExecStop=/usr/bin/openvpn3 session-manage --disconnect --config /etc/openvpn3/client/lenovo-loq.ovpn
+ExecStop=/usr/bin/openvpn3 session-manage --disconnect --config /etc/openvpn3/client/white-pc.ovpn
 Restart=on-failure
 RestartSec=10
 Environment=HOME=/root
