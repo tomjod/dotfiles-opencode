@@ -1,8 +1,8 @@
 [Unit]
-Description=Input Leap — Keyboard/Mouse Sharing
+Description=Input Leap Server — Keyboard/Mouse Sharing
 Documentation=https://github.com/input-leap/input-leap
-Wants=graphical-session.target
 After=graphical-session.target
+Wants=graphical-session.target
 
 [Service]
 Type=simple
