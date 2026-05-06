@@ -3,26 +3,14 @@ Description=OpenVPN3 — White PC VPN (home access)
 Documentation=https://openvpn.net/
 Wants=network-online.target
 After=network-online.target
-Before=display-manager.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/openvpn3 session-start \
-    --config /etc/openvpn3/client/white-pc.ovpn \
-    --background \
-    --persist-tun
-ExecStop=/usr/bin/openvpn3 session-manage --disconnect --config /etc/openvpn3/client/white-pc.ovpn
+ExecStart=/usr/bin/openvpn3 session-start --config white-pc --background --persist-tun
+ExecStop=/usr/bin/openvpn3 session-manage --config white-pc --disconnect
 Restart=on-failure
-RestartSec=10
+RestartSec=15
 Environment=HOME=/root
-
-# Network capabilities
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW
-PrivateTmp=yes
-ProtectSystem=strict
-ProtectHome=yes
-ReadWritePaths=/etc/openvpn3 /run/openvpn3
 
 [Install]
 WantedBy=multi-user.target
