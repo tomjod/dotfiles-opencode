@@ -6,7 +6,13 @@ Wants=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/home/mv/.local/input-leap/bin/input-leap
+ExecStart=/home/mv/.local/input-leap/bin/input-leaps \
+    --config /home/mv/.config/InputLeap/server.conf \
+    --address :24800 \
+    --no-daemon \
+    --name mv-MS-7B16 \
+    --use-x11 \
+    --restart
 Restart=on-failure
 RestartSec=5
 Environment=DISPLAY=:0
