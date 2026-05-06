@@ -1,0 +1,14 @@
+# Sensitive — never commit
+*.env
+*.env.*
+opencode.json
+credentials.json
+
+# Node deps (re-installed by bootstrap)
+node_modules/
+bun.lock
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db

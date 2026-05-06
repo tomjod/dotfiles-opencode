@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+# ============================================================
+# OpenCode Pro Bootstrap — replica tu setup en cualquier PC
+# ============================================================
+set -euo pipefail
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+log()  { echo -e "${GREEN}✅${NC} $1"; }
+warn() { echo -e "${YELLOW}⚠️${NC}  $1"; }
+fail() { echo -e "${RED}❌${NC} $1"; exit 1; }
+info() { echo -e "${CYAN}📦${NC} $1"; }
+ask()  { echo -e "${YELLOW}🔑${NC} $1"; }
+
+# ─── Detect OS ──────────────────────────────────────────
+OS="$(uname -s)"
+case "$OS" in
+    Linux)   PKG_MANAGER="apt|dnf|pacman|brew";;
+    Darwin)  PKG_MANAGER="brew";;
+    *)       fail "Unsupported OS: $OS (Linux or macOS expected)";;
+esac
+
+echo ""
+echo "============================================"
+echo "  OpenCode Pro Bootstrap"
+echo "============================================"
+echo ""
+
+# ─── Check: dotfiles directory exists ───────────────────
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES="$SCRIPT_DIR"
+
+if [ ! -f "$DOTFILES/opencode/AGENTS.md" ]; then
+    fail "Run from dotfiles repo root. Expected opencode/AGENTS.md"
+fi
+
+# ─── 1. Fish Shell ─────────────────────────────────────
+info "Step 1/7: Fish shell"
+if command -v fish &>/dev/null; then
+    log "Fish already installed"
+else
+    warn "Fish not found. Install it:"
+    echo "    Linux: sudo apt install fish   or   sudo pacman -S fish"
+    echo "    macOS: brew install fish"
+    echo ""
+    read -rp "Press enter after installing fish..."
+fi
+
+# ─── 2. OpenCode ────────────────────────────────────────
+info "Step 2/7: OpenCode"
+if command -v opencode &>/dev/null; then
+    log "OpenCode $(opencode --version 2>/dev/null || echo '?') installed"
+else
+    warn "Installing OpenCode..."
+    curl -fsSL https://opencode.ai/install | bash
+    log "OpenCode installed"
+fi
+
+# ─── 3. Engram ──────────────────────────────────────────
+info "Step 3/7: Engram (persistent memory)"
+if command -v engram &>/dev/null; then
+    log "Engram installed ($(engram version 2>/dev/null || echo '?'))"
+else
+    warn "Engram not found."
+    echo "  Install via: curl -fsSL https://engram.ai/install | bash"
+    echo "  Or: brew install engram"
+    echo ""
+    read -rp "Press enter after installing engram (or type 'skip' to continue without it)..."
+    if [ "$REPLY" = "skip" ]; then
+        warn "Skipping Engram — memory persistence will be disabled"
+    fi
+fi
+
+# ─── 4. Copy config files ───────────────────────────────
+info "Step 4/7: Config files"
+
+# Fish
+mkdir -p ~/.config/fish
+cp "$DOTFILES/fish/config.fish" ~/.config/fish/config.fish
+log "Fish config → ~/.config/fish/config.fish"
+
+# OpenCode
+mkdir -p ~/.config/opencode/{skills,prompts,commands,plugins,acp}
+cp -r "$DOTFILES/opencode/skills/"* ~/.config/opencode/skills/
+cp -r "$DOTFILES/opencode/prompts/"* ~/.config/opencode/prompts/
+cp -r "$DOTFILES/opencode/commands/"* ~/.config/opencode/commands/
+cp "$DOTFILES/opencode/plugins/"*.ts ~/.config/opencode/plugins/
+cp "$DOTFILES/opencode/AGENTS.md" ~/.config/opencode/
+cp "$DOTFILES/opencode/tui.json" ~/.config/opencode/
+cp "$DOTFILES/opencode/package.json" ~/.config/opencode/
+cp "$DOTFILES/opencode/bun.lock" ~/.config/opencode/ 2>/dev/null || true
+cp "$DOTFILES/opencode/acp/avante-nvim.lua" ~/.config/opencode/acp/ 2>/dev/null || true
+log "OpenCode config → ~/.config/opencode/"
+
+# opencode.json — asks for secrets
+if [ -f ~/.config/opencode/opencode.json ]; then
+    warn "opencode.json already exists, skipping (backup at opencode.json.bak)"
+    cp ~/.config/opencode/opencode.json ~/.config/opencode/opencode.json.bak
+fi
+cp "$DOTFILES/opencode/opencode.json.template" ~/.config/opencode/opencode.json
+log "opencode.json from template (secrets need manual setup — see below)"
+
+# Systemd (Linux only)
+if [ "$OS" = "Linux" ]; then
+    mkdir -p ~/.config/systemd/user
+    cp "$DOTFILES/systemd/opencode-server.service" ~/.config/systemd/user/
+    log "Systemd service → ~/.config/systemd/user/"
+fi
+
+# Zed
+mkdir -p ~/.config/zed
+cp "$DOTFILES/zed/settings.json" ~/.config/zed/settings.json
+log "Zed ACP config → ~/.config/zed/settings.json"
+
+# ─── 5. Install plugin dependencies ─────────────────────
+info "Step 5/7: Plugin dependencies (bun install)"
+if command -v bun &>/dev/null; then
+    (cd ~/.config/opencode && bun install --silent 2>/dev/null && log "Dependencies installed") || warn "bun install failed — plugins may not work"
+else
+    warn "Bun not found. Install it: curl -fsSL https://bun.sh/install | bash"
+    warn "Then run: cd ~/.config/opencode && bun install"
+fi
+
+# ─── 6. Systemd service ─────────────────────────────────
+if [ "$OS" = "Linux" ] && systemctl --user enable opencode-server.service 2>/dev/null; then
+    systemctl --user start opencode-server.service 2>/dev/null || true
+    log "OpenCode server service enabled and started"
+else
+    warn "Systemd not available — server won't auto-start (use 'ocs-start' manually)"
+fi
+
+# ─── 7. API Keys reminder ───────────────────────────────
+echo ""
+echo "============================================"
+echo "  ⚠️  MANUAL STEPS REQUIRED"
+echo "============================================"
+echo ""
+ask "1. Stitch API Key (UI design generation)"
+echo "   Edit ~/.config/opencode/opencode.json"
+echo "   Search for: YOUR_STITCH_API_KEY"
+echo "   Replace with your Google AI Studio key"
+echo ""
+ask "2. Supabase project (database)"
+echo "   Edit ~/.config/opencode/opencode.json"
+echo "   Search for: YOUR_SUPABASE_PROJECT_REF"
+echo "   Replace with your project ref (or disable supabase MCP)"
+echo ""
+ask "3. Model API keys (OpenAI / Anthropic / DeepSeek)"
+echo "   Run 'opencode' or '/connect' in TUI to configure providers"
+echo ""
+ask "4. VS Code Settings"
+echo "   OpenCode extension auto-installs on first 'opencode' run"
+echo "   To copy additional settings, merge from your dotfiles backup:"
+echo "   ~/.config/Code/User/settings.json"
+echo ""
+echo "============================================"
+echo "  🎉 BOOTSTRAP COMPLETE"
+echo "============================================"
+echo ""
+echo "  Restart your shell:"
+echo "    exec fish"
+echo ""
+echo "  Available commands (Fish):"
+echo "    oc          → opencode"
+echo "    ocs         → opencode serve"
+echo "    oca         → opencode acp"
+echo "    ocs-start   → start server service"
+echo "    ocs-status  → check server status"
+echo "    ocs-logs    → tail server logs"
+echo ""
