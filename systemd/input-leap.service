@@ -12,7 +12,7 @@ ExecStart=/home/mv/.local/input-leap/bin/input-leaps \
     --no-daemon \
     --name mv-MS-7B16 \
     --use-x11 \
-    --restart
+    --disable-crypto
 Restart=on-failure
 RestartSec=5
 Environment=DISPLAY=:0
