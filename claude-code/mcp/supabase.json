@@ -1,0 +1,11 @@
+{
+  "args": [
+    "-y",
+    "@supabase/mcp-server-supabase"
+  ],
+  "command": "npx",
+  "env": {
+    "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}",
+    "SUPABASE_PROJECT_REF": "xluyetzvjnuactdvnpsf"
+  }
+}
