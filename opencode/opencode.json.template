@@ -82,7 +82,7 @@
       "description": "Implement code changes from task definitions",
       "hidden": true,
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "anthropic/claude-sonnet-4-6",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
@@ -152,7 +152,7 @@
       "description": "Archive completed change artifacts",
       "hidden": true,
       "mode": "subagent",
-      "model": "anthropic/claude-opus-4-6",
+      "model": "anthropic/claude-haiku-4-5",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
@@ -222,7 +222,7 @@
       "description": "Create technical design from proposals",
       "hidden": true,
       "mode": "subagent",
-      "model": "anthropic/claude-opus-4-6",
+      "model": "anthropic/claude-sonnet-4-6",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
@@ -292,7 +292,7 @@
       "description": "Investigate codebase and think through ideas",
       "hidden": true,
       "mode": "subagent",
-      "model": "anthropic/claude-opus-4-6",
+      "model": "anthropic/claude-sonnet-4-6",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
@@ -362,7 +362,7 @@
       "description": "Bootstrap SDD context and project configuration",
       "hidden": true,
       "mode": "subagent",
-      "model": "anthropic/claude-opus-4-6",
+      "model": "anthropic/claude-haiku-4-5",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
@@ -436,7 +436,8 @@
         "edit": true,
         "read": true,
         "write": true
-      }
+      },
+      "model": "anthropic/claude-sonnet-4-6"
     },
     "sdd-onboard-deepseek": {
       "description": "Guide user through a complete SDD cycle using their real codebase",
@@ -672,7 +673,7 @@
       "description": "Write detailed specifications from proposals",
       "hidden": true,
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "anthropic/claude-sonnet-4-6",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
@@ -742,7 +743,7 @@
       "description": "Break down specs and designs into implementation tasks",
       "hidden": true,
       "mode": "subagent",
-      "model": "anthropic/claude-opus-4-6",
+      "model": "anthropic/claude-haiku-4-5",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
@@ -812,7 +813,7 @@
       "description": "Validate implementation against specs",
       "hidden": true,
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "anthropic/claude-sonnet-4-6",
       "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
@@ -889,6 +890,14 @@
       "**/secrets/**": "deny",
       "*.env": "deny",
       "*.env.*": "deny"
+    }
+  },
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "http://127.0.0.1:3456",
+        "apiKey": "dummy"
+      }
     }
   },
   "plugin": [
