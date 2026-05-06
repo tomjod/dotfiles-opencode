@@ -1,0 +1,21 @@
+[Unit]
+Description=Meridian — Claude Max Proxy
+Documentation=https://github.com/rynfar/meridian
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/meridian
+Restart=on-failure
+RestartSec=3
+Environment=MERIDIAN_PORT=3456
+Environment=MERIDIAN_HOST=127.0.0.1
+Environment=MERIDIAN_PASSTHROUGH=true
+Environment=HOME=%h
+
+# Security hardening
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=default.target

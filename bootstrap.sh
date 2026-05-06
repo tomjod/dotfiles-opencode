@@ -39,7 +39,7 @@ if [ ! -f "$DOTFILES/opencode/AGENTS.md" ]; then
 fi
 
 # ─── 1. Fish Shell ─────────────────────────────────────
-info "Step 1/7: Fish shell"
+info "Step 1/8: Fish shell"
 if command -v fish &>/dev/null; then
     log "Fish already installed"
 else
@@ -51,7 +51,7 @@ else
 fi
 
 # ─── 2. OpenCode ────────────────────────────────────────
-info "Step 2/7: OpenCode"
+info "Step 2/8: OpenCode"
 if command -v opencode &>/dev/null; then
     log "OpenCode $(opencode --version 2>/dev/null || echo '?') installed"
 else
@@ -60,8 +60,17 @@ else
     log "OpenCode installed"
 fi
 
-# ─── 3. Engram ──────────────────────────────────────────
-info "Step 3/7: Engram (persistent memory)"
+# ─── 3. Meridian (Claude Pro proxy) ────────────────────
+info "Step 3/8: Meridian — Claude Pro proxy"
+if command -v meridian &>/dev/null; then
+    log "Meridian $(meridian --version 2>/dev/null || echo '?') installed"
+else
+    warn "Meridian not found. Install via: npm install -g @rynfar/meridian"
+    read -rp "Press enter after installing..."
+fi
+
+# ─── 4. Engram ──────────────────────────────────────────
+info "Step 4/8: Engram (persistent memory)"
 if command -v engram &>/dev/null; then
     log "Engram installed ($(engram version 2>/dev/null || echo '?'))"
 else
@@ -76,7 +85,7 @@ else
 fi
 
 # ─── 4. Copy config files ───────────────────────────────
-info "Step 4/7: Config files"
+info "Step 5/8: Config files"
 
 # Fish
 mkdir -p ~/.config/fish
@@ -108,7 +117,8 @@ log "opencode.json from template (secrets need manual setup — see below)"
 if [ "$OS" = "Linux" ]; then
     mkdir -p ~/.config/systemd/user
     cp "$DOTFILES/systemd/opencode-server.service" ~/.config/systemd/user/
-    log "Systemd service → ~/.config/systemd/user/"
+    cp "$DOTFILES/systemd/meridian.service" ~/.config/systemd/user/
+    log "Systemd services → ~/.config/systemd/user/"
 fi
 
 # Zed
@@ -117,7 +127,7 @@ cp "$DOTFILES/zed/settings.json" ~/.config/zed/settings.json
 log "Zed ACP config → ~/.config/zed/settings.json"
 
 # ─── 5. Git credential helper ──────────────────────────
-info "Step 5/7: Git credential helper (GITHUB_TOKEN)"
+info "Step 6/8: Git credential helper (GITHUB_TOKEN)"
 mkdir -p ~/.local/bin
 cp "$DOTFILES/bin/git-credential-github-token" ~/.local/bin/
 chmod +x ~/.local/bin/git-credential-github-token
@@ -137,7 +147,7 @@ fi
 echo ""
 
 # ─── 6. Install plugin dependencies ─────────────────────
-info "Step 6/7: Plugin dependencies (bun install)"
+info "Step 7/8: Plugin dependencies (bun install)"
 if command -v bun &>/dev/null; then
     (cd ~/.config/opencode && bun install --silent 2>/dev/null && log "Dependencies installed") || warn "bun install failed — plugins may not work"
 else
@@ -145,15 +155,22 @@ else
     warn "Then run: cd ~/.config/opencode && bun install"
 fi
 
-# ─── 7. Systemd service ─────────────────────────────────
-if [ "$OS" = "Linux" ] && systemctl --user enable opencode-server.service 2>/dev/null; then
-    systemctl --user start opencode-server.service 2>/dev/null || true
-    log "OpenCode server service enabled and started"
+# ─── 8. Systemd services ─────────────────────────────────
+if [ "$OS" = "Linux" ]; then
+    systemctl --user daemon-reload 2>/dev/null
+    systemctl --user enable meridian.service 2>/dev/null && \
+        systemctl --user start meridian.service 2>/dev/null && \
+        log "Meridian (Claude proxy) enabled and started" || \
+        warn "Meridian systemd setup failed"
+    systemctl --user enable opencode-server.service 2>/dev/null && \
+        systemctl --user start opencode-server.service 2>/dev/null && \
+        log "OpenCode server enabled and started" || \
+        warn "OpenCode systemd setup failed"
 else
-    warn "Systemd not available — server won't auto-start (use 'ocs-start' manually)"
+    warn "Systemd not available — use 'ocs-start' manually"
 fi
 
-# ─── 7. API Keys reminder ───────────────────────────────
+# ─── 9. API Keys reminder ───────────────────────────────
 echo ""
 echo "============================================"
 echo "  ⚠️  MANUAL STEPS REQUIRED"

@@ -31,8 +31,21 @@ exec fish
 - OpenCode (`curl -fsSL https://opencode.ai/install | bash`)
 - Fish shell (`apt install fish` / `brew install fish`)
 - Bun (`curl -fsSL https://bun.sh/install | bash`)
+- Meridian (`npm install -g @rynfar/meridian`) — para Claude Pro proxy
+- Claude Code CLI (`npm install -g @anthropic-ai/claude-code`) + `claude login`
 - Engram opcional (`curl -fsSL https://engram.ai/install | bash`) — para memoria persistente
 - Git + `~/.local/bin` en PATH (incluido en fish config)
+
+## Claude Pro (usá tu suscripción sin API key)
+
+El setup incluye **Meridian** como servicio systemd que corre en `:3456`. OpenCode rutea todas las requests de Anthropic por ese proxy, autenticando con tu sesión de Claude Pro (OAuth vía `claude login`).
+
+```fish
+ocs-status          # OpenCode server
+systemctl --user status meridian   # Claude proxy
+curl localhost:3456/health         # Proxy health
+curl localhost:3456/telemetry      # Dashboard de uso
+```
 
 ## Secrets (setup manual)
 
