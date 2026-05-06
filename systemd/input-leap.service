@@ -6,7 +6,7 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/home/mv/Downloads/input-leap-ubuntu-24-04-v3.0.3/input-leap-ubuntu-24-04/input-leap-ubuntu-24-04/bin/input-leap
+ExecStart=/home/mv/.local/input-leap/bin/input-leap
 Restart=on-failure
 RestartSec=5
 Environment=DISPLAY=:0
