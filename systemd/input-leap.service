@@ -6,6 +6,7 @@ Wants=graphical-session.target
 
 [Service]
 Type=simple
+ExecStartPre=/usr/bin/xhost +SI:localuser:mv
 ExecStart=/home/mv/.local/input-leap/bin/input-leaps \
     --config /home/mv/.config/InputLeap/server.conf \
     --address :24800 \
