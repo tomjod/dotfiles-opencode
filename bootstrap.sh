@@ -93,14 +93,15 @@ cp "$DOTFILES/fish/config.fish" ~/.config/fish/config.fish
 log "Fish config → ~/.config/fish/config.fish"
 
 # OpenCode
-mkdir -p ~/.config/opencode/{skills,prompts,commands,plugins,acp}
+mkdir -p ~/.config/opencode/{skills,prompts,commands,plugins,acp,themes}
 cp -r "$DOTFILES/opencode/skills/"* ~/.config/opencode/skills/
 cp -r "$DOTFILES/opencode/prompts/"* ~/.config/opencode/prompts/
 cp -r "$DOTFILES/opencode/commands/"* ~/.config/opencode/commands/
+cp -r "$DOTFILES/opencode/themes/"* ~/.config/opencode/themes/
 cp "$DOTFILES/opencode/plugins/"*.ts ~/.config/opencode/plugins/
 cp "$DOTFILES/opencode/AGENTS.md" ~/.config/opencode/
 cp "$DOTFILES/opencode/tui.json" ~/.config/opencode/
-cp "$DOTFILES/opencode/package.json" ~/.config/opencode/
+cp "$DOTFILES/opencode/package.json" ~/.config/opencode/ 2>/dev/null || warn "package.json not found — plugins may not work"
 cp "$DOTFILES/opencode/bun.lock" ~/.config/opencode/ 2>/dev/null || true
 cp "$DOTFILES/opencode/acp/avante-nvim.lua" ~/.config/opencode/acp/ 2>/dev/null || true
 log "OpenCode config → ~/.config/opencode/"
@@ -111,6 +112,12 @@ if [ -f ~/.config/opencode/opencode.json ]; then
     cp ~/.config/opencode/opencode.json ~/.config/opencode/opencode.json.bak
 fi
 cp "$DOTFILES/opencode/opencode.json.template" ~/.config/opencode/opencode.json
+sed -i "s|__HOME__|$HOME|g" ~/.config/opencode/opencode.json
+
+# Auto-detect engram binary path (prefer PATH, fallback to known locations)
+ENGRAM_BIN=$(command -v engram 2>/dev/null || echo "/home/linuxbrew/.linuxbrew/bin/engram")
+sed -i "s|/home/linuxbrew/.linuxbrew/bin/engram|$ENGRAM_BIN|g" ~/.config/opencode/opencode.json
+
 log "opencode.json from template (secrets need manual setup — see below)"
 
 # Systemd (Linux only)

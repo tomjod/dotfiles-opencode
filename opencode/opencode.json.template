@@ -51,7 +51,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-apply.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -70,7 +70,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-apply.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -83,7 +83,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-6",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-apply.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -102,7 +102,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-apply.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-apply.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -121,7 +121,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-archive.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -140,7 +140,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-archive.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -153,7 +153,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-haiku-4-5",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-archive.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -172,7 +172,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-archive.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-archive.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -191,7 +191,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-design.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -210,7 +210,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-design.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -223,7 +223,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-6",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-design.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -242,7 +242,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-design.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-design.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -261,7 +261,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-explore.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -280,7 +280,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-explore.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -293,7 +293,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-6",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-explore.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -312,7 +312,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-explore.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-explore.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -331,7 +331,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-init.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -350,7 +350,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-init.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -363,7 +363,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-haiku-4-5",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-init.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -382,7 +382,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-init.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-init.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -400,7 +400,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-onboard.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-onboard.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -418,7 +418,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-onboard.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-onboard.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -430,7 +430,7 @@
       "description": "Guide user through a complete SDD cycle using their real codebase",
       "hidden": true,
       "mode": "subagent",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-onboard.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-onboard.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -449,7 +449,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-onboard.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-onboard.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -572,7 +572,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-propose.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-propose.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -591,7 +591,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-propose.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-propose.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -604,7 +604,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-opus-4-7",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-propose.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-propose.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -623,7 +623,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-propose.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-propose.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -642,7 +642,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-spec.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -661,7 +661,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-spec.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -674,7 +674,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-6",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-spec.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -693,7 +693,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-spec.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-spec.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -712,7 +712,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-tasks.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -731,7 +731,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-tasks.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -744,7 +744,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-haiku-4-5",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-tasks.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -763,7 +763,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-tasks.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-tasks.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -782,7 +782,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-verify.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -801,7 +801,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-verify.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -814,7 +814,7 @@
       "hidden": true,
       "mode": "subagent",
       "model": "anthropic/claude-sonnet-4-6",
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-verify.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
         "edit": true,
@@ -833,7 +833,7 @@
         "edit": "allow",
         "read": "allow"
       },
-      "prompt": "{file:/home/mv/.config/opencode/prompts/sdd/sdd-verify.md}",
+      "prompt": "{file:__HOME__/.config/opencode/prompts/sdd/sdd-verify.md}",
       "tools": {
         "bash": true,
         "edit": true,
