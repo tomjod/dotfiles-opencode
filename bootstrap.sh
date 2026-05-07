@@ -39,7 +39,7 @@ if [ ! -f "$DOTFILES/opencode/AGENTS.md" ]; then
 fi
 
 # ─── 1. Fish Shell ─────────────────────────────────────
-info "Step 1/8: Fish shell"
+info "Step 1/9: Fish shell"
 if command -v fish &>/dev/null; then
     log "Fish already installed"
 else
@@ -51,7 +51,7 @@ else
 fi
 
 # ─── 2. OpenCode ────────────────────────────────────────
-info "Step 2/8: OpenCode"
+info "Step 2/9: OpenCode"
 if command -v opencode &>/dev/null; then
     log "OpenCode $(opencode --version 2>/dev/null || echo '?') installed"
 else
@@ -61,7 +61,7 @@ else
 fi
 
 # ─── 3. Meridian (Claude Pro proxy) ────────────────────
-info "Step 3/8: Meridian — Claude Pro proxy"
+info "Step 3/9: Meridian — Claude Pro proxy"
 if command -v meridian &>/dev/null; then
     log "Meridian $(meridian --version 2>/dev/null || echo '?') installed"
 else
@@ -70,7 +70,7 @@ else
 fi
 
 # ─── 4. Engram ──────────────────────────────────────────
-info "Step 4/8: Engram (persistent memory)"
+info "Step 4/9: Engram (persistent memory)"
 if command -v engram &>/dev/null; then
     log "Engram installed ($(engram version 2>/dev/null || echo '?'))"
 else
@@ -84,8 +84,8 @@ else
     fi
 fi
 
-# ─── 4. Copy config files ───────────────────────────────
-info "Step 5/8: Config files"
+# ─── 5. Copy config files ───────────────────────────────
+info "Step 5/9: Config files"
 
 # Fish
 mkdir -p ~/.config/fish
@@ -133,8 +133,8 @@ mkdir -p ~/.config/zed
 cp "$DOTFILES/zed/settings.json" ~/.config/zed/settings.json
 log "Zed ACP config → ~/.config/zed/settings.json"
 
-# ─── 5. Git credential helper ──────────────────────────
-info "Step 6/8: Git credential helper (GITHUB_TOKEN)"
+# ─── 6. Git credential helper ──────────────────────────
+info "Step 6/9: Git credential helper (GITHUB_TOKEN)"
 mkdir -p ~/.local/bin
 cp "$DOTFILES/bin/git-credential-github-token" ~/.local/bin/
 chmod +x ~/.local/bin/git-credential-github-token
@@ -153,8 +153,8 @@ else
 fi
 echo ""
 
-# ─── 6. Install plugin dependencies ─────────────────────
-info "Step 7/8: Plugin dependencies (bun install)"
+# ─── 7. Install plugin dependencies ─────────────────────
+info "Step 7/9: Plugin dependencies (bun install)"
 if command -v bun &>/dev/null; then
     (cd ~/.config/opencode && bun install --silent 2>/dev/null && log "Dependencies installed") || warn "bun install failed — plugins may not work"
 else
@@ -163,6 +163,7 @@ else
 fi
 
 # ─── 8. Systemd services ─────────────────────────────────
+info "Step 8/9: Systemd services"
 if [ "$OS" = "Linux" ]; then
     systemctl --user daemon-reload 2>/dev/null
     systemctl --user enable meridian.service 2>/dev/null && \
@@ -177,7 +178,56 @@ else
     warn "Systemd not available — use 'ocs-start' manually"
 fi
 
-# ─── 9. API Keys reminder ───────────────────────────────
+# ─── 9. OpenVPN3 (split-tunnel, auto-connect at boot) ─────
+info "Step 9/9: OpenVPN 3 setup"
+VPN_CONFIG_NAME="dotfiles-vpn"
+
+if command -v openvpn3 &>/dev/null; then
+    ask "Path to your .ovpn profile (or press enter to skip):"
+    read -r OVPN_PATH
+
+    if [ -n "$OVPN_PATH" ] && [ -f "$OVPN_PATH" ]; then
+        # Remove old config if it exists
+        openvpn3 config-remove --config "$VPN_CONFIG_NAME" --force 2>/dev/null || true
+
+        # Stop and disable old systemd service (ignore errors)
+        sudo systemctl stop "openvpn3-session@${VPN_CONFIG_NAME}.service" 2>/dev/null || true
+        sudo systemctl disable "openvpn3-session@${VPN_CONFIG_NAME}.service" 2>/dev/null || true
+
+        # Import profile
+        openvpn3 config-import --config "$OVPN_PATH" --name "$VPN_CONFIG_NAME" --persistent
+        log "VPN profile imported as '$VPN_CONFIG_NAME'"
+
+        # Grant root access for systemd auto-start
+        openvpn3 config-acl --config "$VPN_CONFIG_NAME" \
+            --grant root \
+            --transfer-owner-session true \
+            --lock-down true
+        log "VPN ACL: root access granted"
+
+        # Use system DNS for internet, VPN DNS only for tunnel domains
+        openvpn3 config-manage --config "$VPN_CONFIG_NAME" --dns-scope tunnel
+        log "VPN DNS: tunnel-only (your system DNS handles internet)"
+
+        # Enable and start via systemd (survives reboots, no login needed)
+        if [ "$OS" = "Linux" ]; then
+            sudo systemctl enable --now "openvpn3-session@${VPN_CONFIG_NAME}.service"
+            log "VPN auto-connect enabled (starts at boot)"
+        fi
+    elif [ -n "$OVPN_PATH" ]; then
+        warn "File not found: $OVPN_PATH"
+    else
+        warn "Skipping VPN setup"
+    fi
+else
+    warn "OpenVPN3 not installed. Install it first, then run:"
+    echo "   openvpn3 config-import --config <file.ovpn> --name $VPN_CONFIG_NAME --persistent"
+    echo "   openvpn3 config-acl --config $VPN_CONFIG_NAME --grant root --transfer-owner-session true --lock-down true"
+    echo "   openvpn3 config-manage --config $VPN_CONFIG_NAME --dns-scope tunnel"
+    echo "   sudo systemctl enable --now openvpn3-session@${VPN_CONFIG_NAME}.service"
+fi
+
+# ─── 10. API Keys reminder ──────────────────────────────
 echo ""
 echo "============================================"
 echo "  ⚠️  MANUAL STEPS REQUIRED"
