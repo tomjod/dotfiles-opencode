@@ -84,7 +84,8 @@ if [ "$ALL_MODE" = false ]; then
     echo -e "  ${DIM}Example: '3 6' skips Meridian + VPN${NC}"
     echo -e "  ${DIM}Press Enter to install all${NC}"
     echo ""
-    read -rp "  ${BOLD}→${NC} " DESELECT
+    printf "  ${BOLD}→${NC} "
+    read -r DESELECT
 
     for num in $DESELECT; do
         case "$num" in
@@ -106,7 +107,7 @@ fi
 if command -v sudo &>/dev/null; then
     echo -e "${YELLOW}Enter sudo password (cached for this session):${NC}"
     sudo -v
-    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null) &
+    (while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null < /dev/null) &
     echo ""
 fi
 
@@ -321,6 +322,8 @@ if [ "$INSTALL_OPENVPN" = true ] && [ "$OS" = "Linux" ]; then
         OVPN_PATH="${OVPN_PATH:-}"
         if [ -z "$OVPN_PATH" ]; then
             echo -e "  ${YELLOW}Path to .ovpn profile${NC} ${DIM}(or Enter to skip)${NC}"
+            # Flush any buffered stdin before reading
+            read -r -t 0.1 -n 10000 _discard 2>/dev/null || true
             read -r OVPN_PATH
         else
             info "OVPN_PATH from environment"
