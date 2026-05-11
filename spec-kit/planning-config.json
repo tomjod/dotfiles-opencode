@@ -1,0 +1,22 @@
+{
+  "model_profile": "balanced",
+  "mode": "interactive",
+  "resolve_model_ids": "full",
+  "model_overrides": {
+    "gsd-planner": "opencode-go/deepseek-v4-pro",
+    "gsd-roadmapper": "opencode-go/deepseek-v4-pro", 
+    "gsd-executor": "opencode-go/deepseek-v4-flash",
+    "gsd-phase-researcher": "opencode-go/deepseek-v4-pro",
+    "gsd-project-researcher": "opencode-go/deepseek-v4-pro",
+    "gsd-research-synthesizer": "opencode-go/deepseek-v4-flash",
+    "gsd-debugger": "opencode-go/deepseek-v4-pro",
+    "gsd-codebase-mapper": "opencode-go/deepseek-v4-flash",
+    "gsd-verifier": "opencode-go/deepseek-v4-pro",
+    "gsd-plan-checker": "opencode-go/deepseek-v4-flash",
+    "gsd-integration-checker": "opencode-go/deepseek-v4-flash",
+    "gsd-nyquist-auditor": "opencode-go/deepseek-v4-flash"
+  },
+  "git": {
+    "branching_strategy": "none"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "model_profile": "balanced",
+  "model_overrides": {
+    "gsd-planner": "opencode-go/deepseek-v4-pro",
+    "gsd-roadmapper": "kimi/kimi-k2.6",
+    "gsd-executor": "opencode-go/deepseek-v4-flash",
+    "gsd-phase-researcher": "kimi/kimi-k2.6",
+    "gsd-project-researcher": "zai/glm-5.1",
+    "gsd-debugger": "opencode-go/deepseek-v4-pro",
+    "gsd-codebase-mapper": "opencode-go/deepseek-v4-flash",
+    "gsd-verifier": "kimi/kimi-k2.6",
+    "gsd-plan-checker": "opencode-go/deepseek-v4-flash",
+    "gsd-integration-checker": "zai/glm-5.1",
+    "gsd-security-auditor": "opencode-go/deepseek-v4-pro"
+  },
+  "_kimi": "Best for: agent swarm, long-horizon coding, verification — 256K ctx, SWE-Bench Pro 58.6%",
+  "_glm": "Best for: sustained optimization, autonomous loops — 200K ctx, SWE-Bench Pro 58.4%",
+  "_deepseek_pro": "Best for: coding, debugging, architecture — 1M ctx, LiveCodeBench 93.5%",
+  "_deepseek_flash": "Best for: fast execution, scanning, docs — 1M ctx, 12x cheaper than Pro"
+}
