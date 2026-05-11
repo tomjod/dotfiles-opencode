@@ -1,0 +1,10 @@
+# Wallpaper caches (machine-specific, regenerated)
+dot_config/hypr/wallpaper_effects/
+# Initial boot marker (should run on new machines)
+dot_config/hypr/.initial_startup_done
+# SSH keys (never sync)
+.ssh/
+# Caches
+.cache/
+__pycache__/
+*.pyc
